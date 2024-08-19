@@ -19,22 +19,22 @@ namespace cudaq {
 // U|0> -> |1>, U|1> -> |2>, ..., and U|d> -> |0>
 template <std::size_t Levels>
 void plus(cudaq::qudit<Levels> &q) {
-  cudaq::getExecutionManager()->apply("plusGate", {}, {},
-                                      {{q.n_levels(), q.id()}});
+  cudaq::get_execution_manager().apply("plusGate", {}, {},
+                                       {{q.n_levels(), q.id()}});
 }
 
 /// @brief The `phase shift` gate
 template <std::size_t Levels>
 void phase_shift(cudaq::qudit<Levels> &q, const double &phi) {
-  cudaq::getExecutionManager()->apply("phaseShiftGate", {phi}, {},
-                                      {{q.n_levels(), q.id()}});
+  cudaq::get_execution_manager().apply("phaseShiftGate", {phi}, {},
+                                       {{q.n_levels(), q.id()}});
 }
 
 /// @brief The `beam splitter` gate
 template <std::size_t Levels>
 void beam_splitter(cudaq::qudit<Levels> &q, cudaq::qudit<Levels> &r,
                    const double &theta) {
-  cudaq::getExecutionManager()->apply(
+  cudaq::get_execution_manager().apply(
       "beamSplitterGate", {theta}, {},
       {{q.n_levels(), q.id()}, {r.n_levels(), r.id()}});
 }
@@ -42,7 +42,7 @@ void beam_splitter(cudaq::qudit<Levels> &q, cudaq::qudit<Levels> &r,
 /// @brief Measure a qudit
 template <std::size_t Levels>
 int mz(cudaq::qudit<Levels> &q) {
-  return cudaq::getExecutionManager()->measure({q.n_levels(), q.id()});
+  return cudaq::get_execution_manager().measure({q.n_levels(), q.id()});
 }
 
 /// @brief Measure a vector of qudits
