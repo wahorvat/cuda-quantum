@@ -59,7 +59,7 @@ public:
     auto precision = std::is_same_v<complex::value_type, float>
                          ? simulation_precision::fp32
                          : simulation_precision::fp64;
-    get_execution_manager().initializeState(targets, vector.data(), precision);
+    getExecutionManager().initializeState(targets, vector.data(), precision);
   }
   qvector(const std::vector<complex> &vector)
       : qvector(vector, /*validate=*/false){};
@@ -96,7 +96,7 @@ public:
     for (auto &q : qudits)
       targets.emplace_back(QuditInfo{Levels, q.id()});
     // Note: the internal state data will be cloned by the simulator backend.
-    get_execution_manager().initializeState(targets, state.internal.get());
+    getExecutionManager().initializeState(targets, state.internal.get());
   }
   explicit qvector(const state *ptr) : qvector(*ptr){};
   explicit qvector(state *ptr) : qvector(*ptr){};

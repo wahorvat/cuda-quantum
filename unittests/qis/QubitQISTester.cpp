@@ -26,7 +26,7 @@ CUDAQ_TEST(QubitQISTester, checkAllocateDeallocateSubRegister) {
     h(f, qq[2]);
   }
 
-  EXPECT_FALSE(cudaq::get_execution_manager().memoryLeaked());
+  EXPECT_FALSE(cudaq::getExecutionManager().memoryLeaked());
 
   {
     cudaq::qvector q(10);
@@ -40,7 +40,7 @@ CUDAQ_TEST(QubitQISTester, checkAllocateDeallocateSubRegister) {
 
     // out of scope, qubits returned
   }
-  EXPECT_FALSE(cudaq::get_execution_manager().memoryLeaked());
+  EXPECT_FALSE(cudaq::getExecutionManager().memoryLeaked());
 
   {
     cudaq::qvector q(15);
@@ -79,7 +79,7 @@ CUDAQ_TEST(QubitQISTester, checkAllocateDeallocateSubRegister) {
     EXPECT_EQ(slice_from_span[1].id(), 13);
   }
 
-  EXPECT_FALSE(cudaq::get_execution_manager().memoryLeaked());
+  EXPECT_FALSE(cudaq::getExecutionManager().memoryLeaked());
 }
 
 CUDAQ_TEST(QubitQISTester, checkArray) {

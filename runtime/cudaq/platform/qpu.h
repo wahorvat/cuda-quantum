@@ -25,7 +25,7 @@ class optimizer;
 class SerializedCodeExecutionContext;
 
 /// Expose the function that will return the current ExecutionManager
-ExecutionManager &get_execution_manager();
+ExecutionManager &getExecutionManager();
 
 /// A CUDA-Q QPU is an abstraction on the quantum processing
 /// unit which executes quantum kernel expressions. The QPU exposes
@@ -62,7 +62,7 @@ protected:
     if (execute) {
       ScopedTraceWithContext(cudaq::TIMING_OBSERVE,
                              "handleObservation flushGateQueue()");
-      get_execution_manager().flushGateQueue();
+      getExecutionManager().flushGateQueue();
     }
     if (execute) {
       ScopedTraceWithContext(cudaq::TIMING_OBSERVE,

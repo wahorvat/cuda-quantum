@@ -583,9 +583,9 @@ public:
     // After performing lowerQuakeCode, check to see if we are simply drawing
     // the circuit. If so, perform the trace here and then return.
     if (executionContext->name == "tracer" && jitEngines.size() == 1) {
-      cudaq::get_execution_manager().setExecutionContext(executionContext);
+      cudaq::getExecutionManager().setExecutionContext(executionContext);
       invokeJITKernelAndRelease(jitEngines[0], kernelName);
-      cudaq::get_execution_manager().resetExecutionContext();
+      cudaq::getExecutionManager().resetExecutionContext();
       jitEngines.clear();
       return;
     }
@@ -636,9 +636,9 @@ public:
                 for (std::size_t shot = 0; shot < localShots; shot++) {
                   cudaq::ExecutionContext context("sample", 1);
                   context.hasConditionalsOnMeasureResults = true;
-                  cudaq::get_execution_manager().setExecutionContext(&context);
+                  cudaq::getExecutionManager().setExecutionContext(&context);
                   invokeJITKernel(localJIT[0], kernelName);
-                  cudaq::get_execution_manager().resetExecutionContext();
+                  cudaq::getExecutionManager().resetExecutionContext();
                   counts += context.result;
                 }
                 // Process `counts` and store into `results`
@@ -653,9 +653,9 @@ public:
             for (std::size_t i = 0; i < codes.size(); i++) {
               cudaq::ExecutionContext context("sample", localShots);
               context.reorderIdx = reorderIdx;
-              cudaq::get_execution_manager().setExecutionContext(&context);
+              cudaq::getExecutionManager().setExecutionContext(&context);
               invokeJITKernelAndRelease(localJIT[i], kernelName);
-              cudaq::get_execution_manager().resetExecutionContext();
+              cudaq::getExecutionManager().resetExecutionContext();
 
               // If there are multiple codes, this is likely a spin_op.
               // If so, use the code name instead of the global register.

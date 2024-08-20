@@ -193,15 +193,15 @@ public:
 };
 
 /// Get the default execution manager instance.
-ExecutionManager *getExecutionManager();
+ExecutionManager *get_execution_manager();
 
 ExecutionManager *getExecutionManagerInternal();
-inline ExecutionManager &get_execution_manager() {
+inline ExecutionManager &getExecutionManager() {
   ExecutionManager *em = getExecutionManagerInternal();
   if (em) {
     return *em;
   }
-  return *getExecutionManager();
+  return *get_execution_manager();
 }
 
 } // namespace cudaq
@@ -214,14 +214,14 @@ inline ExecutionManager &get_execution_manager() {
 #define CONCAT_INNER(a, b) a##b
 #define CUDAQ_REGISTER_EXECUTION_MANAGER(Manager, Name)                        \
   namespace cudaq {                                                            \
-  ExecutionManager *getExecutionManager() {                                    \
+  ExecutionManager *get_execution_manager() {                                  \
     thread_local static std::unique_ptr<ExecutionManager> qis_manager =        \
         std::make_unique<Manager>();                                           \
     return qis_manager.get();                                                  \
   }                                                                            \
   }                                                                            \
   extern "C" {                                                                 \
-  cudaq::ExecutionManager *CONCAT(getExecutionManager_, Name)() {              \
+  cudaq::ExecutionManager *CONCAT(get_execution_manager_, Name)() {            \
     thread_local static std::unique_ptr<cudaq::ExecutionManager> qis_manager = \
         std::make_unique<cudaq::Manager>();                                    \
     return qis_manager.get();                                                  \

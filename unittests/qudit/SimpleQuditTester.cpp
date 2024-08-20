@@ -17,12 +17,12 @@
 
 // Plus Gate : U|0> -> |1>, U|1> -> |2>, and U|2> -> |0>
 void plusGate(cudaq::qudit<3> &q) {
-  auto em = cudaq::getExecutionManager();
+  auto em = cudaq::get_execution_manager();
   em->apply("plusGate", {}, {}, {{q.n_levels(), q.id()}});
 }
 
 int mz(cudaq::qudit<3> &q) {
-  auto em = cudaq::getExecutionManager();
+  auto em = cudaq::get_execution_manager();
   return em->measure({q.n_levels(), q.id()});
 }
 
