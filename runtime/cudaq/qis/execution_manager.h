@@ -197,11 +197,7 @@ ExecutionManager *get_execution_manager();
 
 ExecutionManager *getExecutionManagerInternal();
 inline ExecutionManager &getExecutionManager() {
-  ExecutionManager *em = getExecutionManagerInternal();
-  if (em) {
-    return *em;
-  }
-  return *get_execution_manager();
+  return *getExecutionManagerInternal();
 }
 
 } // namespace cudaq

@@ -22,5 +22,10 @@ void resetExecutionManagerInternal() {
   execution_manager = nullptr;
 }
 
-ExecutionManager *getExecutionManagerInternal() { return execution_manager; }
+ExecutionManager *getExecutionManagerInternal() {
+  if (execution_manager) {
+    return execution_manager;
+  }
+  return get_execution_manager();
+}
 } // namespace cudaq
