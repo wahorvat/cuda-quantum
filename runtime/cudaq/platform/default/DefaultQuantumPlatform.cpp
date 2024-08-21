@@ -52,7 +52,7 @@ public:
     if (noiseModel)
       executionContext->noiseModel = noiseModel;
 
-    cudaq::getExecutionManager().setExecutionContext(executionContext);
+    cudaq::getExecutionManager()->setExecutionContext(executionContext);
   }
 
   /// Overrides resetExecutionContext to forward to
@@ -62,7 +62,7 @@ public:
         executionContext->name == "observe" ? cudaq::TIMING_OBSERVE : 0,
         "DefaultPlatform::resetExecutionContext", executionContext->name);
     handleObservation(executionContext);
-    cudaq::getExecutionManager().resetExecutionContext();
+    cudaq::getExecutionManager()->resetExecutionContext();
     executionContext = nullptr;
   }
 };

@@ -81,7 +81,7 @@ T getValueOrThrow(llvm::Expected<T> valOrErr,
 // JIT. This needs to be called when the registered operations may contain
 // pointers into the code objects inside the JIT.
 void clearRegOpsAndDestroyJIT(std::unique_ptr<llvm::orc::LLJIT> &jit) {
-  cudaq::getExecutionManager().clearRegisteredOperations();
+  cudaq::getExecutionManager()->clearRegisteredOperations();
   jit.release();
 }
 

@@ -27,28 +27,28 @@ void bindExecutionManager(py::module &mod) {
                        [](auto &&el) { return cudaq::QuditInfo(2, el); });
         std::transform(targets.begin(), targets.end(), std::back_inserter(t),
                        [](auto &&el) { return cudaq::QuditInfo(2, el); });
-        cudaq::getExecutionManager().apply(name, params, c, t, isAdjoint, op);
+        cudaq::getExecutionManager()->apply(name, params, c, t, isAdjoint, op);
       },
       py::arg("name"), py::arg("params"), py::arg("controls"),
       py::arg("targets"), py::arg("isAdjoint") = false,
       py::arg("op") = cudaq::spin_op());
 
   mod.def("startAdjointRegion",
-          []() { cudaq::getExecutionManager().startAdjointRegion(); });
+          []() { cudaq::getExecutionManager()->startAdjointRegion(); });
   mod.def("endAdjointRegion",
-          []() { cudaq::getExecutionManager().endAdjointRegion(); });
+          []() { cudaq::getExecutionManager()->endAdjointRegion(); });
 
   mod.def("startCtrlRegion", [](std::vector<std::size_t> &controls) {
-    cudaq::getExecutionManager().startCtrlRegion(controls);
+    cudaq::getExecutionManager()->startCtrlRegion(controls);
   });
   mod.def("endCtrlRegion", [](std::size_t nControls) {
-    cudaq::getExecutionManager().endCtrlRegion(nControls);
+    cudaq::getExecutionManager()->endCtrlRegion(nControls);
   });
   mod.def(
       "measure",
       [](std::size_t id, const std::string &regName) {
-        return cudaq::getExecutionManager().measure(cudaq::QuditInfo(2, id),
-                                                    regName);
+        return cudaq::getExecutionManager()->measure(cudaq::QuditInfo(2, id),
+                                                     regName);
       },
       py::arg("qubit"), py::arg("register_name") = "");
 }

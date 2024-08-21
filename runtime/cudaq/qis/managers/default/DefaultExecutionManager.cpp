@@ -260,7 +260,7 @@ extern "C" {
 /// qubit, measure a qubit, and apply the gates defined by CUDA-Q.
 
 std::int64_t __nvqpp__cudaq_em_allocate() {
-  return cudaq::getExecutionManager().allocateQudit();
+  return cudaq::getExecutionManager()->allocateQudit();
 }
 
 void __nvqpp__cudaq_em_apply(const char *gateName, std::int64_t numParams,
@@ -278,23 +278,23 @@ void __nvqpp__cudaq_em_apply(const char *gateName, std::int64_t numParams,
   };
   std::vector<cudaq::QuditInfo> cv = fromSpan(ctrls);
   std::vector<cudaq::QuditInfo> tv = fromSpan(targets);
-  cudaq::getExecutionManager().apply(gateName, pv, cv, tv, isAdjoint);
+  cudaq::getExecutionManager()->apply(gateName, pv, cv, tv, isAdjoint);
 }
 
 std::int32_t __nvqpp__cudaq_em_measure(const std::span<std::size_t> &targets,
                                        const char *tagName) {
   cudaq::QuditInfo qubit{2u, targets[0]};
   std::string tag{tagName};
-  return cudaq::getExecutionManager().measure(qubit, tag);
+  return cudaq::getExecutionManager()->measure(qubit, tag);
 }
 
 void __nvqpp__cudaq_em_reset(const std::span<std::size_t> &targets) {
   cudaq::QuditInfo qubit{2u, targets[0]};
-  cudaq::getExecutionManager().reset(qubit);
+  cudaq::getExecutionManager()->reset(qubit);
 }
 
 void __nvqpp__cudaq_em_return(const std::span<std::size_t> &targets) {
   cudaq::QuditInfo qubit{2u, targets[0]};
-  cudaq::getExecutionManager().returnQudit(qubit);
+  cudaq::getExecutionManager()->returnQudit(qubit);
 }
 }

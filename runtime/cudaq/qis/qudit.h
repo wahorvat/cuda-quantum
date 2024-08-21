@@ -27,7 +27,7 @@ class qudit {
 
 public:
   /// Construct a qudit, will allocated a new unique index
-  qudit() : idx(getExecutionManager().allocateQudit(n_levels())) {}
+  qudit() : idx(getExecutionManager()->allocateQudit(n_levels())) {}
   qudit(const std::vector<complex> &state) : qudit() {
     if (state.size() != Levels)
       throw std::runtime_error(
@@ -46,8 +46,8 @@ public:
     auto precision = std::is_same_v<complex::value_type, float>
                          ? simulation_precision::fp32
                          : simulation_precision::fp64;
-    getExecutionManager().initializeState({QuditInfo(n_levels(), idx)},
-                                          state.data(), precision);
+    getExecutionManager()->initializeState({QuditInfo(n_levels(), idx)},
+                                           state.data(), precision);
   }
   qudit(const std::initializer_list<complex> &list)
       : qudit({list.begin(), list.end()}) {}
@@ -79,7 +79,7 @@ public:
   qudit<Levels> &operator!() { return negate(); }
 
   // Destructor, return the qudit so it can be reused
-  ~qudit() { getExecutionManager().returnQudit({n_levels(), idx}); }
+  ~qudit() { getExecutionManager()->returnQudit({n_levels(), idx}); }
 };
 
 // A qubit is a qudit with 2 levels.
