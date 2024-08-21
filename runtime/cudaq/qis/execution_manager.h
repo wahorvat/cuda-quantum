@@ -192,9 +192,19 @@ public:
   virtual ~ExecutionManager() = default;
 };
 
+// Function declaration, implemented by the macro expansion below
+ExecutionManager *getRegisteredExecutionManager();
+
+// Function declaration, implemented elsewhere
 ExecutionManager *getExecutionManagerInternal();
+
+// Get the execution manager instance.
 inline ExecutionManager *getExecutionManager() {
-  return getExecutionManagerInternal();
+  ExecutionManager *em = getExecutionManagerInternal();
+  if (em) {
+    return em;
+  }
+  return getRegisteredExecutionManager();
 }
 
 } // namespace cudaq
